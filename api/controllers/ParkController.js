@@ -18,7 +18,7 @@ module.exports = {
   /**
    * `ParkController.auth()`
    */
-  authenticate: function (req, res) {
+  auth: function (req, res) {
     Park.findOne({ email: req.param('email'), password: req.param('password') }, function (err, user) {
       if (err || !user) return res.send('fodeu');
     
