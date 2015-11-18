@@ -25,10 +25,10 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
-  
-  '/parking': 'ParkController.parking',
-  'poost /parking/auth': 'ParkController.auth',
-  
+
+  '/park': 'ParkController.index',
+  'post /park/auth': 'ParkController.auth',
+
   '/app': 'AppController.index',
   'post /app/auth': 'AppController.auth'
 

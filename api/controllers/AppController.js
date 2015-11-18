@@ -7,13 +7,13 @@
 
 module.exports = {
 
-  layoutName: 'layout_app',
+  layoutName: 'layouts/layout_app',
 
   index: function (req, res) {
     if (req.session.user) {
-      res.view('app/map', { layout: layoutName });
+      res.view('app/map', { layout: this.layoutName });
     } else {
-      res.view('app/auth', { layout: layoutName });
+      res.view('app/auth', { layout: this.layoutName });
     }
   },
 
