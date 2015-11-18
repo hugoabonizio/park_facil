@@ -14,6 +14,22 @@ module.exports = {
     email : { type: 'email', required: true },
 
     password : { type: 'text', required: true }
+  },
+
+  beforeCreate: function(values, cb) {
+
+    require('machinepack-passwords').encryptPassword({
+      password: values.password,
+      difficulty: 10,
+    }).exec({
+      error: function(err) {
+        return cb(err);
+      },
+      success: function(encryptedPassword) {
+        values.password = encryptedPassword;
+        cb();
+      }
+    });
+
   }
 };
-
