@@ -9,13 +9,19 @@ module.exports = {
 
   attributes: {
 
-    name : { type: 'string' },
+    name : { type: 'string', required: true },
+    
+    email: { type: 'email', required: true },
+    
+    password: { type: 'string', required: true },
 
-    lots : { type: 'integer' },
+    lots : { type: 'integer', required: true },
 
-    latitude : { type: 'string' },
+    latitude : { type: 'string', required: true },
 
-    longitude : { type: 'string' }
+    longitude : { type: 'string', required: true }
+    
+    // numero ticket, entrada (data), placa, convenio (bool), telefone
   }
 };
 

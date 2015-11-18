@@ -34,7 +34,10 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+  
+  '/parking': 'ParkController.parking',
+  '/parking/authenticate': 'ParkController.authenticate'
 
   /***************************************************************************
   *                                                                          *
