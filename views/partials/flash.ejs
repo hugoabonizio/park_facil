@@ -1,0 +1,40 @@
+<% if (flash && flash['error'].length > 0) { %>
+<div class="alert alert-danger text-center">
+	<% flash['error'].forEach(function(message) { %>
+		<%= message %>
+		<br>
+	<% }); %>
+</div>
+<br>
+<% } %>
+
+<% if (flash && flash['warning'].length > 0) { %>
+<div class="alert alert-warning text-center">
+	<% flash['warning'].forEach(function(message) { %>
+		<%= message %>
+		<br>
+	<% }); %>
+</div>
+<br>
+<% } %>
+
+<% if (flash && flash['info'].length > 0) { %>
+<div class="alert alert-info text-center">
+	<% flash['info'].forEach(function(message) { %>
+		<%= message %>
+		<br>
+	<% }); %>
+</div>
+<br>
+<% } %>
+
+
+<% if (flash && flash['success'].length > 0) { %>
+<div class="alert alert-success text-center">
+	<% flash['success'].forEach(function(message) { %>
+		<%= message %>
+		<br>
+	<% }); %>
+</div>
+<br>
+<% } %>

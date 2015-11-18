@@ -1,0 +1,1 @@
+forever -o console.log -e console.log -w start app.js
