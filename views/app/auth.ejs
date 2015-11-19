@@ -44,7 +44,7 @@
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
             <input type="password" class="form-control" name="password" placeholder="Password">
           </div>
-          <span class="help-block" style="visibility: hidden;">Password error</span>
+          <span class="help-block"><%- req.flash('message') %></span>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         </form>
       </div>

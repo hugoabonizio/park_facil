@@ -16,7 +16,7 @@ module.exports = {
     password : { type: 'text', required: true }
   },
 
-  beforeCreate: function(values, cb) {
+  beforeCreate: function (values, cb) {
 
     require('machinepack-passwords').encryptPassword({
       password: values.password,
@@ -31,5 +31,22 @@ module.exports = {
       }
     });
 
+  },
+  
+  authenticate: function (email, password, callback) {
+    User.findOne({
+      email: email
+    }, function foundUser(err, user) {
+      if (err || !user) return callback(err, null);
+
+      require('machinepack-passwords').checkPassword({
+        passwordAttempt: password,
+        encryptedPassword: user.password
+      }).exec({
+        success: function () { callback(null, user) },
+        error: function (err) { callback(err, null) },
+        incorrect: function () { callback(err, null) }
+      });
+    });
   }
 };

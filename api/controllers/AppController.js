@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  layoutName: 'layouts/layout_app',
+  layoutName: 'layouts/app',
 
   index: function (req, res) {
     if (req.session.user) {
@@ -17,25 +17,15 @@ module.exports = {
     }
   },
 
-  auth: function (req, res) {
-    require('machinepack-passwords').encryptPassword({
-      password: req.param('password'),
-      difficulty: 10,
-    }).exec({
-      error: function(err) {
-        return res.negotiate(err);
-      },
-      success: function(encryptedPassword) {
-        User.findOne({
-          email: req.param('email'),
-          password: encryptedPassword
-        }, function foundUser(err, user) {
-          if (err || !user) return res.send('fodeu');
-          //ACHOU USUARIO
-          req.session.user = user;
-          res.redirect('/app');
-        })
+  auth: function(req, res) {
+    User.authenticate(req.param('email'), req.param('password'), function (err, user) {
+      if (err) {
+        req.flash('message', 'Login incorreto!');
+        return res.redirect('/app');
       }
+      
+      req.session.user = user;
+      return res.redirect('/app');
     });
   }
 };
