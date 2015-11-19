@@ -19,6 +19,7 @@ module.exports = {
 
 	port: 1337,
 	models: {
+		// connection: 'localDiskDb',
 		connection: 'mongoLabServer'
 	}
 
