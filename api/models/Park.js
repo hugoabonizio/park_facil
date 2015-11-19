@@ -15,9 +15,12 @@ module.exports = {
     lots : { type: 'integer', required: true },
     latitude : { type: 'string', required: true },
     longitude : { type: 'string', required: true },
+    shops: { type: 'string', size: 100 },
+    offer: { type: 'string', size: 100 },
+
     tickets:{
-        collection: 'ticket',
-        via: 'park'
+      collection: 'ticket',
+      via: 'park'
     }
 
     // numero ticket, entrada (data), placa, convenio (bool), telefone

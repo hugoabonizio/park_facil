@@ -13,25 +13,28 @@ $(function(){
 
 </script>
 
-<form action="/park/ticket" method="post">
-  <div class="input-group">
-    <div class="row">
-      <div class="col-lg-12">
-        <label>Placa do Veículo</label>
-        <input type="text" class="form-control" placeholder="AAA-9999" name="placa">
-      </div>
+<form action="/park/salvarTicket" method="post">
+  <div class="row">
+    <div class="col-lg-3">
+      <label>Placa do Veículo</label>
+      <input type="text" class="form-control" placeholder="AAA-9999" name="placa">
+    </div>
 
-      <div class="col-lg-12">
-        <label>Telefone</label>
-        <input type="text" class="form-control" placeholder="(XX) 99999-9999" name="telefone">
-      </div>
-
-      <div class="col-lg-12">
-        <input type="checkbox" class="form-control" name="mensalista" value="true" id="mensalistaSwitch">
-      </div>
-
-      <div class="col-lg-offset-4 col-lg-4">
-        <input type="submit" class="form-control">
-      </div>
+    <div class="col-lg-3">
+      <label>Telefone</label>
+      <input type="text" class="form-control" placeholder="(XX) 99999-9999" name="telefone">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-3">
+      <input type="checkbox" class="form-control" name="mensalista" value="true" id="mensalistaSwitch">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4">
+      <input type="submit" class="form-control">
+    </div>
   </div>
 </form>

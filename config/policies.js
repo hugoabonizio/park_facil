@@ -28,6 +28,11 @@ module.exports.policies = {
 
   '*': ['flash'],
 
+  'ParkController': {
+    '*': ['park'],
+    'index' : true,
+    'auth': true
+  }
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *

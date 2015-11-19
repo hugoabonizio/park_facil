@@ -1,0 +1,41 @@
+<script src="/js/lib/simplyCountable-jQuery.js"></script>
+<script>
+$(function(){
+  $('#convenios').simplyCountable({
+      counter: '#convenios-count',
+      countType: 'characters',
+      maxCount: 100,
+      strictMax: true
+  });
+  $('#promocoes').simplyCountable({
+      counter: '#promocoes-count',
+      countType: 'characters',
+      maxCount: 100,
+      strictMax: true
+  });
+});
+</script>
+<style>
+  #convenios, #promocoes{
+    min-height: 138px;
+    resize: none;
+  }
+</style>
+<form action="/park/salvarEdit" method="post">
+  <div class="row">
+    <div class="col-lg-6">
+      <label>Convênios (<span id="convenios-count">0</span> caracteres restantes)</label>
+      <textarea class="form-control" name="convenios" id="convenios" placeholder="Lista dos convênios separados por vírgula"></textarea>
+    </div>
+    <div class="col-lg-6">
+      <label>Promoções (<span id="promocoes-count">0</span> caracteres restantes)</label>
+      <textarea class="form-control" name="promocoes" id="promocoes"></textarea>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4">
+      <input type="submit" class="form-control" value="Salvar">
+    </div>
+  </div>
+</form>

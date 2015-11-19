@@ -10,21 +10,26 @@ module.exports = {
 	layoutName : 'layouts/dashboard',
 
 	index: function (req, res) {
-    // if (req.session.user) {
+    if (req.session.park) {
       res.view('park/parking', { layout: this.layoutName });
-    // } else {
-    //   res.view('park/auth', { layout: layoutName });
-    // }
+    } else {
+      res.view('park/auth');
+    }
   },
+
+	editar: function(req, res){
+		res.view({layout: this.layoutName});
+	},
+
+	preco: function(req, res){
+		res.view({layout: this.layoutName});
+	},
 
 	gerarTicket: function(req, res){
 		res.view({layout: this.layoutName});
 	},
 
-	ticket: function(req, res){
-		if(!req.session.park){
-      return res.forbidden('Faça login novamente para submeter um novo ticket');
-    }
+	salvarTicket: function(req, res){
 		Ticket.create({
 			placa: req.param('placa'),
 			mensalista: Boolean(req.param('mensalista') || false),
@@ -36,7 +41,25 @@ module.exports = {
 			  // return res.negotiate(err);
 				return res.notFound();
 			}
-			//TODO
+			//TODO - mensagens flash
+			// Flash.success('Ticket criado com sucesso');
+			return res.redirect('/park/index');
+		});
+	},
+
+	salvarEdit: function(req, res){
+		Ticket.create({
+			placa: req.param('placa'),
+			mensalista: Boolean(req.param('mensalista') || false),
+			telefone: req.param('telefone'),
+			park: req.session.park.id
+		}, function ticketCreated(err, newUser) {
+			if (err) {
+				console.log(err);
+			  // return res.negotiate(err);
+				return res.notFound();
+			}
+			//TODO - mensagens flash
 			// Flash.success('Ticket criado com sucesso');
 			return res.redirect('/park/index');
 		});
