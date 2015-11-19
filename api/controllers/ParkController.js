@@ -17,6 +17,31 @@ module.exports = {
     // }
   },
 
+	gerarTicket: function(req, res){
+		res.view({layout: this.layoutName});
+	},
+
+	ticket: function(req, res){
+		if(!req.session.park){
+      return res.forbidden('Faça login novamente para submeter um novo ticket');
+    }
+		Ticket.create({
+			placa: req.param('placa'),
+			mensalista: Boolean(req.param('mensalista') || false),
+			telefone: req.param('telefone'),
+			park: req.session.park.id
+		}, function ticketCreated(err, newUser) {
+			if (err) {
+				console.log(err);
+			  // return res.negotiate(err);
+				return res.notFound();
+			}
+			//TODO
+			// Flash.success('Ticket criado com sucesso');
+			return res.redirect('/park/index');
+		});
+	},
+
   auth: function (req, res) {
     // require('machinepack-passwords').encryptPassword({
     //   password: req.param('password'),
@@ -30,10 +55,10 @@ module.exports = {
           email: req.param('email'),
           password: req.param('password')
 					// password: encryptedPassword
-        }, function foundUser(err, user) {
-					if (err || !user) return res.send('fodeu');
+        }, function foundUser(err, park) {
+					if (err || !park) return res.send('fodeu');
 
-					req.session.user = user;
+					req.session.park = park;
 					res.redirect('/park');
         })
     //   }

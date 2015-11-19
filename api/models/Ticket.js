@@ -19,7 +19,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-    convenio: {
+    mensalista: {
       type: 'boolean',
       required: true
     },
@@ -27,7 +27,7 @@ module.exports = {
       type: 'string'
     },
     park:{
-        model:'park'
+      model:'park'
     }
 
     // numero ticket, entrada (data), placa, convenio (bool), telefone
