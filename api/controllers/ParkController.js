@@ -93,25 +93,5 @@ module.exports = {
 	*/
 	parking: function (req, res) {
 		return res.view();
-	},
-
-
-	/**
-	* `ParkController.edit()`
-	*/
-	edit: function (req, res) {
-		return res.json({
-			todo: 'edit() is not implemented yet!'
-		});
-	},
-
-
-	/**
-	* `ParkController.update()`
-	*/
-	update: function (req, res) {
-		return res.json({
-			todo: 'update() is not implemented yet!'
-		});
 	}
 };
