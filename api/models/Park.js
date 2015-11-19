@@ -24,5 +24,16 @@ module.exports = {
     }
 
     // numero ticket, entrada (data), placa, convenio (bool), telefone
+
+    toJSON: function () {
+      return {
+        name: this.name,
+        lots: this.lots,
+        latitude: this.latitude,
+        longitude: this.longitude
+      }
+    }
   }
+
+
 };
