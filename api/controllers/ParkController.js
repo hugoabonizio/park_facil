@@ -29,15 +29,24 @@ module.exports = {
 		res.view({layout: this.layoutName});
 	},
 
+	tickets: function(req, res){
+		var _this = this;
+		Ticket.find({
+			park: req.session.park.id
+		}).exec(function findCB(err, found){
+			return res.view({layout: _this.layoutName, tickets: found});
+		});
+	},
+
 	gerarTicket: function(req, res){
 		res.view({layout: this.layoutName});
 	},
 
 	salvarTicket: function(req, res){
 		Ticket.create({
-			placa: req.param('placa'),
-			mensalista: Boolean(req.param('mensalista') || false),
-			telefone: req.param('telefone'),
+			licensePlate: req.param('placa'),
+			tel: req.param('telefone'),
+			vehicleType: req.param('tipoVeiculo'),
 			park: req.session.park.id
 		}, function ticketCreated(err, newUser) {
 			if (err) {

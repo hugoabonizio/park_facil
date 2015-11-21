@@ -8,22 +8,22 @@
 module.exports = {
 
   attributes: {
-    entrada: {
+    entranceDate: {
       type: 'datetime',
       required: true,
       defaultsTo: function (){
         return new Date();
       }
     },
-    placa: {
+    licensePlate: {
       type: 'string',
       required: true
     },
-    mensalista: {
-      type: 'boolean',
+    vehicleType: {
+      type: 'string',
       required: true
     },
-    telefone : {
+    tel : {
       type: 'string'
     },
     park:{
