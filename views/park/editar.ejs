@@ -34,6 +34,13 @@ $(function(){
   </div>
   <br>
   <div class="row">
+    <div class="col-lg-4">
+      <label>Preço</label>
+      <input type="string" class="form-control" name="preco" value="<%- req.session.park.price %>" placeholder="Preço por hora do estacionamento">
+    </div>
+  </div>
+  <br>
+  <div class="row">
     <div class="col-lg-offset-4 col-lg-4">
       <input type="submit" class="form-control" value="Salvar">
     </div>
