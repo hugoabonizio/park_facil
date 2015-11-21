@@ -80,20 +80,20 @@ module.exports = {
 	},
 
 	salvarSenha: function(req, res){
-		// require('machinepack-passwords').encryptPassword({
-    //   password: req.param('password'),
-    //   difficulty: 10,
-    // }).exec({
-    //   error: function(err) {
-    //     return res.negotiate(err);
-    //   },
-    //   success: function(encryptedPassword) {
+		require('machinepack-passwords').encryptPassword({
+      password: req.param('password'),
+      difficulty: 10,
+    }).exec({
+      error: function(err) {
+        return res.negotiate(err);
+      },
+      success: function(encryptedPassword) {
 				Park.update(
 					{
 						id: req.session.park.id
 					}, {
-						password: req.param('password'),
-						// password: encryptedPassword,
+						// password: req.param('password'),
+						password: encryptedPassword,
 					}
 				).exec(function passwordSaved(err, updatedPark) {
 					if (err) {
@@ -104,31 +104,20 @@ module.exports = {
 					//TODO - fazer logout geral que tira qualquer login
 					return res.redirect('park/logout');
 				});
-    //   }
-    // });
+      }
+    });
 	},
 
   auth: function (req, res) {
-    // require('machinepack-passwords').encryptPassword({
-    //   password: req.param('password'),
-    //   difficulty: 10,
-    // }).exec({
-    //   error: function(err) {
-    //     return res.negotiate(err);
-    //   },
-    //   success: function(encryptedPassword) {
-        Park.findOne({
-          email: req.param('email'),
-          password: req.param('password')
-					// password: encryptedPassword
-        }, function foundUser(err, park) {
-					if (err || !park) return res.send('fodeu');
+		Park.authenticate(req.param('email'), req.param('password'), function (err, user) {
+      if (err) {
+        req.flash('message', 'Login incorreto!');
+        return res.redirect('/park');
+      }
 
-					req.session.park = _.clone(park);
-					res.redirect('/park');
-        })
-    //   }
-    // });
+      req.session.park = user;
+      return res.redirect('/park');
+    });
   },
 
 	/**

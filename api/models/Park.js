@@ -26,17 +26,48 @@ module.exports = {
       via: 'park'
     },
 
-    // numero ticket, entrada (data), placa, convenio (bool), telefone
-
     toJSON: function () {
       return {
+        id: this.id,
         name: this.name,
         lots: this.lots,
         latitude: this.latitude,
         longitude: this.longitude
       }
     }
-  }
+  },
 
+  beforeCreate: function (values, cb) {
+
+    require('machinepack-passwords').encryptPassword({
+      password: values.password,
+      difficulty: 10,
+    }).exec({
+      error: function(err) {
+        return cb(err);
+      },
+      success: function(encryptedPassword) {
+        values.password = encryptedPassword;
+        cb();
+      }
+    });
+  },
+
+  authenticate: function (email, password, callback) {
+    Park.findOne({
+      email: email
+    }, function foundUser(err, user) {
+      if (err || !user) return callback(err, null);
+
+      require('machinepack-passwords').checkPassword({
+        passwordAttempt: password,
+        encryptedPassword: user.password
+      }).exec({
+        success: function () { callback(null, user) },
+        error: function (err) { callback(err, null) },
+        incorrect: function () { callback(err, null) }
+      });
+    });
+  }
 
 };
