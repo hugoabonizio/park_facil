@@ -1,6 +1,6 @@
 // Loads a list of street parking lots
 function loadLots(google, map) {
-  var lots = [];
+  var lots = {};
   
   $.getJSON('/app/lots', function (result) {
     $.each(result, function (i, lot) {
@@ -13,10 +13,26 @@ function loadLots(google, map) {
         title: '',
         icon: '../../images/icons/lot.png'
       });
-      lots.push(marker);
+      lots[lot.id] = marker;
+      if (!lot.status)
+        marker.setMap(null);
     });
     
-    var mc = new MarkerClusterer(map, lots);
+    var mc = new MarkerClusterer(map, values(lots));
+    
+    setInterval(function () {
+      $.getJSON('/app/lots', function (result) {
+        $.each(result, function (i, lot) {
+          if (lot.status) {
+            lots[lot.id].setMap(null);
+          } else {
+            lots[lot.id].setMap(map);
+          }
+        });
+        mc.resetViewport();
+        mc.redraw();
+      });
+    }, 3000);
   });
 }
 

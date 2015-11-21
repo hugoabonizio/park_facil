@@ -5,3 +5,7 @@ var styles= [{"featureType":"water","stylers":[{"saturation":43},{"lightness":-1
 function markerInfo(name, price) {
   
 }
+
+function values(obj) {
+  return Object.keys(obj).map(function (key) { return obj[key] });
+}

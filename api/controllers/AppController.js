@@ -40,13 +40,18 @@ module.exports = {
   },
   
   lots: function (req, res) {
-    Lot.find({})
-      .then(function (lots) {
-        res.json(lots);
-      })
-      .catch(function (err) {
-        res.status(500);
+    Lot.find({}).exec(function (err, lots) {
+      if (err) res.serverError();
+      
+      lots.forEach(function (lot) {
+        if (Math.random() > 0.8) {
+          lot.status = !lot.status;
+          lot.save();
+        }
       });
+      
+      res.json(lots);
+    });
   }
   
 };
