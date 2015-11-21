@@ -32,6 +32,10 @@ module.exports.policies = {
     '*': ['park'],
     'index' : true,
     'auth': true
+  },
+
+  'AjaxController': {
+    '*' : ['ajax']
   }
   /***************************************************************************
   *                                                                          *
