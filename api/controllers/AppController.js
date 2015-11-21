@@ -39,8 +39,14 @@ module.exports = {
       });
   },
   
-  parkingmeters: function (req, res) {
-    // TODO
+  lots: function (req, res) {
+    Lot.find({})
+      .then(function (lots) {
+        res.json(lots);
+      })
+      .catch(function (err) {
+        res.status(500);
+      });
   }
   
 };

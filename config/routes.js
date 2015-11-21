@@ -32,6 +32,7 @@ module.exports.routes = {
   '/app': 'AppController.index',
   'post /app/auth': 'AppController.auth',
   
-  '/app/parkings': 'AppController.parkings'
+  '/app/parkings': 'AppController.parkings',
+  '/app/lots': 'AppController.lots'
 
 };

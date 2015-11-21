@@ -17,43 +17,12 @@ function initMap() {
     styles: styles
   };
   var map = new google.maps.Map(document.getElementById("map"), mapProp);
-  var parkings = [];
   
-  // Loads a list of parking places around
-  function loadParkings() {
-    $.getJSON('/app/parkings', function (result) {
-      var infos = [];
-      $.each(result, function (i, park) {
-        var infowindow = new google.maps.InfoWindow({
-          content: "<strong>" + park.name + "</strong><br>Preço: R$4,99<br><a href='#'>Visualizar</a>"
-        });
-        infos.push(infowindow);
-        
-        var marker = new google.maps.Marker({
-          position: {
-            lat: parseFloat(park.latitude),
-            lng: parseFloat(park.longitude)
-          },
-          map: map,
-          title: park.name
-        });
-        parkings.push(marker);
-        
-        google.maps.event.addListener(marker, 'click', function () {
-          infos.forEach(function (window) { window.close(); });
-          infowindow.open(map, marker);
-        });
-      });
-      
-      var mc = new MarkerClusterer(map, parkings);
-      
-    });
-  }
-  loadParkings();
+  loadLots(google, map);
+  loadParkings(google, map);
   
   var input = document.getElementById('search-box');
   var searchBox = new google.maps.places.SearchBox(input);
-  // map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
   
   var markers = [];
   // [START region_getplaces]
