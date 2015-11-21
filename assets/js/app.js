@@ -10,13 +10,14 @@ function initMap() {
   });
   
   var mapProp = {
-    center: new google.maps.LatLng(-23.304452400000002 -51.169582399999996),
+    center: new google.maps.LatLng(-23.304452400000002, -51.169582399999996),
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
     styles: styles
   };
   var map = new google.maps.Map(document.getElementById("map"), mapProp);
+  var parkings = [];
   
   // Loads a list of parking places around
   function loadParkings() {
@@ -36,12 +37,16 @@ function initMap() {
           map: map,
           title: park.name
         });
+        parkings.push(marker);
         
         google.maps.event.addListener(marker, 'click', function () {
           infos.forEach(function (window) { window.close(); });
           infowindow.open(map, marker);
         });
       });
+      
+      var mc = new MarkerClusterer(map, parkings);
+      
     });
   }
   loadParkings();
@@ -95,6 +100,7 @@ function initMap() {
     });
     map.fitBounds(bounds);
   });
+  
 }
 
 
