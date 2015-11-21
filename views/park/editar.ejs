@@ -25,11 +25,11 @@ $(function(){
   <div class="row">
     <div class="col-lg-6">
       <label>Convênios (<span id="convenios-count">0</span> caracteres restantes)</label>
-      <textarea class="form-control" name="convenios" id="convenios" placeholder="Lista dos convênios separados por vírgula"></textarea>
+      <textarea class="form-control" name="convenios" id="convenios" placeholder="Lista dos convênios separados por vírgula"><%- req.session.park.shops %></textarea>
     </div>
     <div class="col-lg-6">
       <label>Promoções (<span id="promocoes-count">0</span> caracteres restantes)</label>
-      <textarea class="form-control" name="promocoes" id="promocoes"></textarea>
+      <textarea class="form-control" name="promocoes" id="promocoes" placeholder="Digite aqui algum texto promocional"><%- req.session.park.offer %></textarea>
     </div>
   </div>
   <br>

@@ -21,6 +21,10 @@ module.exports = {
 		res.view({layout: this.layoutName});
 	},
 
+	editarSenha: function(req, res){
+		res.view({layout: this.layoutName});
+	},
+
 	preco: function(req, res){
 		res.view({layout: this.layoutName});
 	},
@@ -37,9 +41,7 @@ module.exports = {
 			park: req.session.park.id
 		}, function ticketCreated(err, newUser) {
 			if (err) {
-				console.log(err);
-			  // return res.negotiate(err);
-				return res.notFound();
+			  return res.negotiate(err);
 			}
 			//TODO - mensagens flash
 			// Flash.success('Ticket criado com sucesso');
@@ -48,21 +50,53 @@ module.exports = {
 	},
 
 	salvarEdit: function(req, res){
-		Ticket.create({
-			placa: req.param('placa'),
-			mensalista: Boolean(req.param('mensalista') || false),
-			telefone: req.param('telefone'),
-			park: req.session.park.id
-		}, function ticketCreated(err, newUser) {
-			if (err) {
-				console.log(err);
-			  // return res.negotiate(err);
-				return res.notFound();
+		Park.update(
+			{
+				id: req.session.park.id
+			}, {
+			shops: req.param('convenios'),
+			offer: req.param('promocoes')
 			}
+		).exec(function parkEdited(err, updatedPark) {
+			if (err) {
+			  return res.negotiate(err);
+			}
+			//Atualiza as informações do estacionamento da sessão
+			req.session.park.offer = updatedPark[0].offer;
+			req.session.park.shops = updatedPark[0].shops;
 			//TODO - mensagens flash
 			// Flash.success('Ticket criado com sucesso');
 			return res.redirect('/park/index');
 		});
+	},
+
+	salvarSenha: function(req, res){
+		// require('machinepack-passwords').encryptPassword({
+    //   password: req.param('password'),
+    //   difficulty: 10,
+    // }).exec({
+    //   error: function(err) {
+    //     return res.negotiate(err);
+    //   },
+    //   success: function(encryptedPassword) {
+				Park.update(
+					{
+						id: req.session.park.id
+					}, {
+						password: req.param('password'),
+						// password: encryptedPassword,
+					}
+				).exec(function passwordSaved(err, updatedPark) {
+					if (err) {
+					  return res.negotiate(err);
+					}
+					//TODO - mensagens flash
+					// Flash.success('Senha alterada com sucesso. Por favor login novamente.');
+					//TODO - fazer logout geral que tira qualquer login
+					return res.redirect('park/logout');
+				});
+    //   }
+    // });
 	},
 
   auth: function (req, res) {
@@ -81,7 +115,7 @@ module.exports = {
         }, function foundUser(err, park) {
 					if (err || !park) return res.send('fodeu');
 
-					req.session.park = park;
+					req.session.park = _.clone(park);
 					res.redirect('/park');
         })
     //   }
@@ -91,7 +125,8 @@ module.exports = {
 	/**
 	* `ParkController.parking()`
 	*/
-	parking: function (req, res) {
-		return res.view();
+	logout: function (req, res) {
+		req.session.park = null;
+		return res.redirect('/park/index');
 	}
 };

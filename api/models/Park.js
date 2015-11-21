@@ -12,10 +12,13 @@ module.exports = {
     name : { type: 'string', required: true },
     email: { type: 'email', required: true },
     password: { type: 'string', required: true },
+    //vagas
     lots : { type: 'integer', required: true },
     latitude : { type: 'string', required: true },
     longitude : { type: 'string', required: true },
+    //convenios
     shops: { type: 'string', size: 100 },
+    //promocoes
     offer: { type: 'string', size: 100 },
 
     tickets:{
