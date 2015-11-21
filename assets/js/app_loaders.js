@@ -10,12 +10,12 @@ function loadLots(google, map) {
           lng: parseFloat(lot.lng)
         },
         map: map,
-        title: ''
+        title: '',
+        icon: '../../images/icons/lot.png'
       });
       lots.push(marker);
     });
     
-    console.log(1);
     var mc = new MarkerClusterer(map, lots);
   });
 }
@@ -39,7 +39,8 @@ function loadParkings(google, map) {
           lng: parseFloat(park.longitude)
         },
         map: map,
-        title: park.name
+        title: park.name,
+        icon: '../../images/icons/park.png'
       });
       parkings.push(marker);
       
@@ -49,7 +50,6 @@ function loadParkings(google, map) {
       });
     });
     
-    console.log(2);
     var mc = new MarkerClusterer(map, parkings);
   });
 }
