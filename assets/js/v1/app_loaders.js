@@ -6,7 +6,7 @@ function loadLots(google, map) {
         var infos = [];
         $.each(result, function (i, lot) {
             var infowindow = new google.maps.InfoWindow({
-                content: "Vagas livres: " + lot.vagasLivres + "<br>Vagas Gerenciadas: "+lot.vagas+"<br>Vagas: 80%"
+                content: "Vagas livres: " + lot.vagasLivres + "<br>Vagas Gerenciadas: "+lot.vagas
             });
             infos.push(infowindow);
             var marker = new google.maps.Marker({
@@ -62,10 +62,10 @@ function loadParkings(google, map) {
     var infos = [];
 
     $.each(result, function (i, park) {
-      var infowindow = new google.maps.InfoWindow({
-        content: "<strong>" + park.name + "</strong><br>Preço: R$4,99<br><a href='#'>Visualizar</a>"
-      });
-      infos.push(infowindow);
+      // var infowindow = new google.maps.InfoWindow({
+      //   content: "<strong>" + park.name + "</strong><br>Preço: R$4,99<br><a href='#'>Visualizar</a>"
+      // });
+      // infos.push(infowindow);
 
       var marker = new google.maps.Marker({
         position: {
@@ -79,8 +79,12 @@ function loadParkings(google, map) {
       parkings.push(marker);
 
       google.maps.event.addListener(marker, 'click', function () {
-        infos.forEach(function (window) { window.close(); });
-        infowindow.open(map, marker);
+        // infos.forEach(function (window) { window.close(); });
+        // infowindow.open(map, marker);
+        $('#infos').show();
+        $('#infos').css('bottom', '0px');
+        $('#infos').html('<img src="/images/icons/loading.gif" style="margin: 0 auto; width: 64px; height: 64px;">');
+        $('#infos').load('/app/parking?id=' + park.id);
       });
     });
 

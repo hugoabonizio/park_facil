@@ -13,7 +13,7 @@ module.exports = {
       // if (req.session.user) {
         res.view('app/map1', { layout: this.layoutName });
       // } else {
-        res.view('app/auth', { layout: this.layoutName });
+        // res.view('app/auth', { layout: this.layoutName });
       // }
   },
 
