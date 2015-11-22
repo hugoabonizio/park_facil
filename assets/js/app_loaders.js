@@ -13,6 +13,7 @@ function loadLots(google, map) {
         title: '',
         icon: '../../images/icons/lot.png'
       });
+      marker._status = lot.status;
       lots[lot.id] = marker;
       if (!lot.status)
         marker.setMap(null);
@@ -22,15 +23,19 @@ function loadLots(google, map) {
     
     setInterval(function () {
       $.getJSON('/app/lots', function (result) {
-        $.each(result, function (i, lot) {
-          if (lot.status) {
-            lots[lot.id].setMap(null);
+        console.log('reload');
+        $.each(result, function (i, ulot) {
+          if (ulot.status) {
+            lots[ulot.id].setMap(null);
           } else {
-            lots[lot.id].setMap(map);
+            lots[ulot.id].setMap(map);
           }
         });
         mc.resetViewport();
-        mc.redraw();
+        // mc.repaint();
+        // mc.redraw();
+        // mc.removeMarkers();
+        mc = new MarkerClusterer(map, valuesOnly(lots, '_status', true));
       });
     }, 3000);
   });

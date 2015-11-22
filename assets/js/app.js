@@ -4,10 +4,10 @@
 
 function initMap() {
 
-  navigator.geolocation.getCurrentPosition(function (pos) {
-    // console.log(pos.coords.latitude, pos.coords.longitude);
-    map.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-  });
+  // navigator.geolocation.getCurrentPosition(function (pos) {
+  //   // console.log(pos.coords.latitude, pos.coords.longitude);
+  //   map.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+  // });
   
   var mapProp = {
     center: new google.maps.LatLng(-23.304452400000002, -51.169582399999996),
