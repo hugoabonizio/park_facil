@@ -29,9 +29,10 @@ module.exports.routes = {
   '/park': 'ParkController.index',
   'post /park/auth': 'ParkController.auth',
 
-  '/app': 'AppController.index',
+  '/app/': 'AppController.index',
+  '/app1/': 'AppController.versao1',
   'post /app/auth': 'AppController.auth',
-  
+
   '/app/parkings': 'AppController.parkings',
   '/app/lots': 'AppController.lots'
 

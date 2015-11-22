@@ -32,12 +32,12 @@ module.exports = {
     });
 
   },
-  
+
   authenticate: function (email, password, callback) {
     User.findOne({
       email: email
     }, function foundUser(err, user) {
-      if (err || !user) return callback(err, null);
+      if (err || !user) return res.send('foteu');
 
       require('machinepack-passwords').checkPassword({
         passwordAttempt: password,
