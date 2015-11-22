@@ -32,7 +32,7 @@ module.exports = {
     });
 
   },
-  
+
   authenticate: function (email, password, callback) {
     User.findOne({
       email: email
