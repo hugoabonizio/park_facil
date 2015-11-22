@@ -6,7 +6,7 @@ function loadLots(google, map) {
         var infos = [];
         $.each(result, function (i, lot) {
             var infowindow = new google.maps.InfoWindow({
-                content: "Vagas livres: " + lot.vagasLivres + "<br>Vagas Gerenciadas: "+lot.vagas+".<br>Percentual de confiabilidade: 80%"
+                content: "Vagas livres: " + lot.vagasLivres + "<br>Vagas Gerenciadas: "+lot.vagas+"<br>Vagas: 80%"
             });
             infos.push(infowindow);
             var marker = new google.maps.Marker({
@@ -19,13 +19,25 @@ function loadLots(google, map) {
                 icon: '../../../images/icons/lot.png'
             });
 
-            var red = parseInt((lot.vagas - lot.vagasLivres)/lot.vagas*255);
-            var green = parseInt(lot.vagasLivres/lot.vagas*255);
+            var ratio = lot.vagasLivres / lot.vagas;
+            
+            var rgb;
+            if (ratio > 0.5) rgb = '255,0,0';
+            if (ratio > 0.2 && ratio <= 0.5) rgb = '229,83,0';
+            if (ratio > 0.1 && ratio <= 0.2) rgb = '111,255,0';
+            if (ratio <= 0.1) rgb = '0,255,0';
+            console.log(ratio, rgb);
+            // var red = parseInt((lot.vagas - lot.vagasLivres)/lot.vagas*128);
+            // if (red < 128) red = 0;
+            // var green = parseInt((lot.vagasLivres/lot.vagas)*255);
+            // if (green < 128) green = 0;
             // Add circle overlay and bind to marker
             var circle = new google.maps.Circle({
                 map: map,
                 radius: 75,    // 10 miles in metres
-                fillColor: 'rgb('+red+','+green+', 0)'
+                fillColor: 'rgb(' + rgb + ')',
+                strokeOpacity: 0,
+                opacity: 0.35
             });
             circle.bindTo('center', marker, 'position');
 
@@ -38,7 +50,7 @@ function loadLots(google, map) {
             parquimetros[lot.id] = marker;
         });
 
-        var mc = new MarkerClusterer(map, values(parquimetros));
+        // var mc = new MarkerClusterer(map, values(parquimetros));
     });
 };
 

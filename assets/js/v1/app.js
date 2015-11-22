@@ -10,8 +10,8 @@ function initMap() {
   // });
   
   var mapProp = {
-    center: new google.maps.LatLng(-23.304452400000002, -51.169582399999996),
-    zoom: 15,
+    center: new google.maps.LatLng(-23.31340730781047, -51.165596544742584),
+    zoom: 17,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
     styles: styles
