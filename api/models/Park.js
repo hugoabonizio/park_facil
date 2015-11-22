@@ -12,6 +12,8 @@ module.exports = {
     name : { type: 'string', required: true },
     email: { type: 'email', required: true },
     password: { type: 'string', required: true },
+    workingTime: {type: 'string', required: true },
+    address: {type: 'string', required: true},
     //vagas
     freeLots: {type: 'integer', required: true},
     lots : { type: 'integer', required: true },
