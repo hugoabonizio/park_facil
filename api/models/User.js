@@ -37,7 +37,7 @@ module.exports = {
     User.findOne({
       email: email
     }, function foundUser(err, user) {
-      if (err || !user) return res.send('foteu');
+      if (err || !user) return callback(err, null);
 
       require('machinepack-passwords').checkPassword({
         passwordAttempt: password,
