@@ -13,10 +13,13 @@ module.exports = {
     email: { type: 'email', required: true },
     password: { type: 'string', required: true },
     //vagas
+    freeLots: {type: 'integer', required: true},
     lots : { type: 'integer', required: true },
     latitude : { type: 'string', required: true },
     longitude : { type: 'string', required: true },
-    price: {type: 'float'},
+    startingTime: {type: 'int', required: true, defaultsTo: 15},
+    startingPrice: {type: 'float', required: true, defaultsTo: 3.5},
+    price: {type: 'float', required: true, defaultsTo: 0.07},
     //convenios
     shops: { type: 'string', size: 100 },
     //promocoes
@@ -33,7 +36,12 @@ module.exports = {
         name: this.name,
         lots: this.lots,
         latitude: this.latitude,
-        longitude: this.longitude
+        longitude: this.longitude,
+        offer: this.offer,
+        shops: this.shops,
+        startingTime: this.startingTime,
+        startingPrice: this.startingPrice,
+        price: this.price
       }
     }
   },

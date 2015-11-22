@@ -34,9 +34,12 @@ $(function(){
   </div>
   <br>
   <div class="row">
-    <div class="col-lg-4">
-      <label>Preço</label>
-      <input type="string" class="form-control" name="preco" value="<%- req.session.park.price %>" placeholder="Preço por hora do estacionamento">
+    <div class="col-lg-12">
+      Cobrar
+      <input type="string" class="1form-control" name="preco" value="<%- req.session.park.price %>" placeholder="0.7"> reais/minuto após
+      <input type="string" class="1form-control" name="minTime" value="<%- req.session.park.startingTime %>" placeholder="15"> minutos.
+      Valor Mínimo =
+      <input type="string" class="1form-control" name="minPrice" value="<%- req.session.park.startingPrice %>" placeholder="3.5">
     </div>
   </div>
   <br>
