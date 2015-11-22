@@ -13,7 +13,7 @@ module.exports = {
     email: { type: 'email', required: true },
     password: { type: 'string', required: true },
     //vagas
-    freeLots: {type: 'integer', required: true}
+    freeLots: {type: 'integer', required: true},
     lots : { type: 'integer', required: true },
     latitude : { type: 'string', required: true },
     longitude : { type: 'string', required: true },
