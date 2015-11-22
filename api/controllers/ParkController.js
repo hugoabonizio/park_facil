@@ -10,8 +10,7 @@ module.exports = {
 	layoutName : 'layouts/dashboard',
 
 	entra: function(req, res){
-		var placa = 'PLA-'+(int)(Math.random()*1000);;
-		console.log('Adicionando placa '+ placa);
+		var placa = 'PLA-'+parseInt(Math.random()*10000);
 		Ticket.create({
 			licensePlate: placa,
 			vehicleType: 'Motocicleta',
@@ -22,12 +21,22 @@ module.exports = {
 	},
 
 	sai: function(req, res){
-		return res.forbidden('sai daqui mané');
+		var _this = this;
 		Ticket.findOne({park: req.session.park.id}).exec(function(err, ticket){
-			return res.view({
-				layout: this.layoutName,
-				ticket: ticket,
-				preco: preco
+			Ticket.destroy({id:ticket.id}).exec(function deleteCB(err){
+				var cobrar = Math.abs(new Date().getTime() - new Date(ticket.entranceDate).getTime())
+				cobrar = Math.ceil(cobrar / (1000 * 60));
+				cobrar = cobrar - req.session.park.startingTime;
+				if(cobrar < 0){
+					cobrar = 0;
+				}
+				var preco = req.session.park.startingPrice + cobrar * req.session.park.price;
+				return res.view({
+					layout: _this.layoutName,
+					ticket: ticket,
+					preco: preco,
+					minutos: cobrar
+				});
 			});
 		});
 	},
