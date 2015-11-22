@@ -15,7 +15,11 @@
 </div>
 
 <div id="map" style="width: 100%; height: 100%; float: left"></div>
-<div id="infos" style="width: 100%; height: 150px; position: absolute; bottom: -150px; left: 0px; background: #fff;" class="text-center"></div>
+<div
+id="infos"
+style="width: 100%; height: 150px; position: absolute; bottom: -500px; display: none; left: 0px; background: #fff;"
+class="text-center">
+</div>
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -30,7 +34,8 @@
   $(document).ready(function () {
     $('#infos').click(function () {
       // $('#map').css('height', '100%');
-      $('#infos').css('bottom', '0px');
+      $('#infos').hide();
+      $('#infos').css('bottom', '500px');
     });
   });
 </script>

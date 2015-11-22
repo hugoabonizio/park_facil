@@ -10,19 +10,19 @@ module.exports = {
   layoutName: 'layouts/app',
 
   versao1: function(req, res){
-      if (req.session.user) {
+      // if (req.session.user) {
         res.view('app/map1', { layout: this.layoutName });
-      } else {
+      // } else {
         res.view('app/auth', { layout: this.layoutName });
-      }
+      // }
   },
 
   index: function (req, res) {
-    if (req.session.user) {
+    // if (req.session.user) {
       res.view('app/map', { layout: this.layoutName });
-    } else {
-      res.view('app/auth', { layout: this.layoutName });
-    }
+    // } else {
+    //   res.view('app/auth', { layout: this.layoutName });
+    // }
   },
 
   auth: function (req, res) {

@@ -69,7 +69,8 @@ function loadParkings(google, map) {
         // infos.forEach(function (window) { window.close(); });
         // infowindow.open(map, marker);
         // $('#map').css('height', '70%');
-        $('#infos').css('bottom', '-200px');
+        $('#infos').show();
+        $('#infos').css('bottom', '0px');
         $('#infos').load('/app/parking?id=' + park.id);
       });
     });
