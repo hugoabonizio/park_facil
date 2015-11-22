@@ -39,6 +39,16 @@ module.exports = {
       });
   },
   
+  parking: function (req, res) {
+    Park.findOne({ id: req.param('id') })
+      .then(function (park) {
+        res.view('app/parking', { layout: null, park: park });
+      })
+      .catch(function (err) {
+        res.status(500);
+      });
+  },
+  
   lots: function (req, res) {
     Lot.find({}).exec(function (err, lots) {
       if (err) res.serverError();

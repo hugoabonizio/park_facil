@@ -6,3 +6,29 @@
   left: 0;
   right: 0;
 }
+
+.infos-title {
+  color: #f53e05;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.infos-addres {
+  color: #666;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
+
+.infos-time {
+  color: #666;
+  font-size: 12px;
+}
+.infos-time span {
+  color: black;
+}
+
+.infos-free {
+  background: #bfdf70;
+  padding: 5px;
+  color: #fff;
+}

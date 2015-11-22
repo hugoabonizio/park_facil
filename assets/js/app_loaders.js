@@ -46,13 +46,13 @@ function loadParkings(google, map) {
   var parkings = [];
   
   $.getJSON('/app/parkings', function (result) {
-    var infos = [];
+    // var infos = [];
     
     $.each(result, function (i, park) {
-      var infowindow = new google.maps.InfoWindow({
-        content: "<strong>" + park.name + "</strong><br>Preço: R$4,99<br><a href='#'>Visualizar</a>"
-      });
-      infos.push(infowindow);
+      // var infowindow = new google.maps.InfoWindow({
+      //   content: "<strong>" + park.name + "</strong><br>Preço: R$4,99<br><a class='view-park' href='/app/parking?id=" + park.id + "'>Visualizar</a>"
+      // });
+      // infos.push(infowindow);
       
       var marker = new google.maps.Marker({
         position: {
@@ -66,9 +66,17 @@ function loadParkings(google, map) {
       parkings.push(marker);
       
       google.maps.event.addListener(marker, 'click', function () {
-        infos.forEach(function (window) { window.close(); });
-        infowindow.open(map, marker);
+        // infos.forEach(function (window) { window.close(); });
+        // infowindow.open(map, marker);
+        // $('#map').css('height', '70%');
+        $('#infos').css('bottom', '-200px');
+        $('#infos').load('/app/parking?id=' + park.id);
       });
+    });
+    
+    map.addListener('click', function () {
+      // $('#map').css('height', '100%');
+      // $('#infos').css('height', '0%');
     });
     
     var mc = new MarkerClusterer(map, parkings);
