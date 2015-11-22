@@ -37,7 +37,7 @@ function loadLots(google, map) {
         // mc.removeMarkers();
         mc = new MarkerClusterer(map, valuesOnly(lots, '_status', true));
       });
-    }, 3000);
+    }, 6000);
   });
 }
 
