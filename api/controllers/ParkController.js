@@ -9,6 +9,29 @@ module.exports = {
 
 	layoutName : 'layouts/dashboard',
 
+	entra: function(req, res){
+		var placa = 'PLA-'+(int)(Math.random()*1000);;
+		console.log('Adicionando placa '+ placa);
+		Ticket.create({
+			licensePlate: placa,
+			vehicleType: 'Motocicleta',
+			park: req.session.park.id
+		}).exec(function(err, ticket){
+			return res.redirect('/park/index');
+		});
+	},
+
+	sai: function(req, res){
+		return res.forbidden('sai daqui mané');
+		Ticket.findOne({park: req.session.park.id}).exec(function(err, ticket){
+			return res.view({
+				layout: this.layoutName,
+				ticket: ticket,
+				preco: preco
+			});
+		});
+	},
+
 	index: function (req, res) {
     if (req.session.park) {
       res.view('park/parking', { layout: this.layoutName });
@@ -64,7 +87,10 @@ module.exports = {
 				id: req.session.park.id
 			}, {
 			shops: req.param('convenios'),
-			offer: req.param('promocoes')
+			offer: req.param('promocoes'),
+			price: req.param('preco'),
+			startingTime: req.param('minTime'),
+			startingPrice: req.param('minPrice')
 			}
 		).exec(function parkEdited(err, updatedPark) {
 			if (err) {
